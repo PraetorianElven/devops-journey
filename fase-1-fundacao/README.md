@@ -1,19 +1,64 @@
-# nip.io e /etc/hosts
+# Fase 1 - Fundacao
 
-# Sobre nip.io
+## Desafio 3 - Diagnostico de rede
 
-O nip.io é um serviço DNS "wildcard" gratuito que mapeia qualquer endereço IP para um nome de host, facilitando o desenvolvimento local e testes ao transformar IPs(como 127.0.0.1) em domínios (127.0.0.1.nip.io). Ele elimina a necessidade de editar o arquivo hosts para cada projeto, permitindo subdomínios dinâmicos.
+O script [bash/diagnostico-rede.sh](/home/paulo/elven/devops-journey/fase-1-fundacao/bash/diagnostico-rede.sh:1) foi criado para coletar informacoes basicas de diagnostico de rede e salvar o resultado em um relatorio `.txt` com timestamp.
 
-nip.io é um serviço de DNS wildcard. Ele transforma um IP dentro do nome em um DNS válido. Exemplo: 192.168.31.79.nip.io resolve para 192.168.31.79. Isso ajuda em labs, Kubernetes, Ingress e testes locais sem precisar comprar domínio.
+### O que o script faz
 
-# Sobre /etc/hosts
+- Resolve DNS de 3 dominios: `google.com`, `github.com` e `httpbin.org`
+- Testa conectividade HTTP com `curl`
+- Lista portas abertas na maquina com `ss` ou `netstat`
+- Salva tudo em um arquivo no formato `relatorio-rede_YYYY-MM-DD_HH-MM-SS.txt`
 
-O /etc/hosts é um arquivo local do Linux que associa IPs a nomes. O formato é:
+### Como executar
 
-IP nome aliases
+```bash
+bash fase-1-fundacao/bash/diagnostico-rede.sh
+```
+
+### Saida esperada
+
+Ao executar, o script:
+
+- exibe o resultado no terminal;
+- gera um arquivo `.txt` com data e hora;
+- registra DNS, resposta HTTP e portas abertas.
+
+## nip.io e /etc/hosts
+
+### Sobre nip.io
+
+O `nip.io` e um servico DNS wildcard gratuito que mapeia qualquer endereco IP para um nome de host, facilitando desenvolvimento local e testes.
 
 Exemplo:
 
-192.168.31.79 minha-app.local
+```text
+192.168.31.79.nip.io
+```
 
-Assim, sua máquina resolve minha-app.local para 192.168.31.79 sem depender de DNS externo.
+Esse nome resolve automaticamente para:
+
+```text
+192.168.31.79
+```
+
+Isso ajuda em labs, Kubernetes, Ingress e testes locais sem precisar comprar dominio nem editar DNS a cada projeto.
+
+### Sobre /etc/hosts
+
+O `/etc/hosts` e um arquivo local do Linux que associa IPs a nomes manualmente.
+
+Formato:
+
+```text
+IP nome aliases
+```
+
+Exemplo:
+
+```text
+192.168.31.79 minha-app.local
+```
+
+Assim, sua maquina resolve `minha-app.local` para `192.168.31.79` sem depender de DNS externo.
