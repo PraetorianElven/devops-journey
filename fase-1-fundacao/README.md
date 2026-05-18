@@ -21,13 +21,6 @@ Esta fase consolidou a base de Linux, Bash, Git, redes e automacao simples em Py
 - O desafio de Python foi ajustado para bater exatamente com o enunciado da fase:
   leitura de arquivo, contagem de linhas/palavras/caracteres e envio via POST
 
-## Status dos desafios
-
-- `Desafio 1`: implementado em [bash/inventario-sistema.sh](/home/paulo/elven/devops-journey/fase-1-fundacao/bash/inventario-sistema.sh:1)
-- `Desafio 2`: parcialmente atendido; ainda depende de abrir PR `develop -> main`, fazer merge e fechar o minimo de 5 commits
-- `Desafio 3`: implementado em [bash/diagnostico-rede.sh](/home/paulo/elven/devops-journey/fase-1-fundacao/bash/diagnostico-rede.sh:1)
-- `Desafio 4`: documentado em [linux/acesso-ssh.md](/home/paulo/elven/devops-journey/fase-1-fundacao/linux/acesso-ssh.md:1), mas a aplicacao no servidor/VM continua sendo manual
-- `Desafio 5`: implementado em [python/script-api.py](/home/paulo/elven/devops-journey/fase-1-fundacao/python/script-api.py:1)
 
 ## Desafio 1 - Inventario do sistema
 
