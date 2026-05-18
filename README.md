@@ -92,7 +92,7 @@ devops-journey/
 ## Fase 1 — Dias 1 a 30: Fundação
 > Meta: Ter base sólida em SO, terminal, Git e networking básico.
 ### Sistema Operacional & Terminal
-- [ ] Bash — scripts básicos, variáveis, loops, condicionais
+- [X] Bash — scripts básicos, variáveis, loops, condicionais
 - [ ] Vim / Nano — edição de arquivos no terminal
 - [ ] Process Monitoring — `top`, `htop`, `ps`, `kill`
 - [ ] Performance Monitoring — `df`, `du`, `iostat`, `vmstat`
