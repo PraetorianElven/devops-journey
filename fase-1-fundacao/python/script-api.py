@@ -1,69 +1,81 @@
-from flask import Flask, jsonify, request
-# Importa do Flask:
-# Flask   -> cria a aplicação web/API
-# jsonify -> transforma dados Python em JSON
-# request -> permite ler dados enviados na requisição
+#!/usr/bin/env python3
 
-app = Flask(__name__)
-# Cria a aplicação Flask.
-# __name__ indica para o Flask qual é o arquivo principal da aplicação.
+"""Conta palavras, linhas e caracteres de um arquivo e envia o resultado via POST."""
 
-tarefas = []
-# Lista em memória onde as tarefas serão guardadas.
-# Atenção: se a aplicação reiniciar, essa lista é apagada.
+from __future__ import annotations
 
-@app.route('/')
-# Define a rota inicial da API.
-# Quando acessar http://localhost:5000/, essa função será executada.
+import json
+import sys
+from pathlib import Path
+from urllib import error, request
 
-def home():
-    # Função executada quando alguém acessa a rota "/".
+DEFAULT_URL = "https://httpbin.org/post"
 
-    return 'Bem-vindo à API de tarefas!'
-    # Retorna uma mensagem simples em texto.
 
-@app.route('/tarefas', methods=['GET'])
-# Define a rota /tarefas usando o método GET.
-# GET é usado para consultar/listar dados.
+def count_text(text: str) -> dict[str, int]:
+    return {
+        "linhas": len(text.splitlines()),
+        "palavras": len(text.split()),
+        "caracteres": len(text),
+    }
 
-def listar_tarefas():
-    # Função que lista todas as tarefas cadastradas.
 
-    return jsonify(tarefas)
-    # Retorna a lista de tarefas no formato JSON.
+def build_payload(file_path: Path) -> dict[str, object]:
+    text = file_path.read_text(encoding="utf-8")
+    counts = count_text(text)
 
-@app.route('/tarefas', methods=['POST'])
-# Define a rota /tarefas usando o método POST.
-# POST é usado para criar/enviar novos dados.
+    return {
+        "arquivo": file_path.name,
+        "caminho": str(file_path.resolve()),
+        **counts,
+    }
 
-def criar_tarefa():
-    # Função responsável por criar uma nova tarefa.
 
-    descricao = request.json.get('descricao')
-    # Pega o campo "descricao" enviado no corpo da requisição JSON.
-    # Exemplo de JSON recebido:
-    # { "descricao": "Estudar Flask" }
+def post_payload(url: str, payload: dict[str, object]) -> tuple[int, str]:
+    data = json.dumps(payload).encode("utf-8")
+    headers = {"Content-Type": "application/json"}
+    http_request = request.Request(url, data=data, headers=headers, method="POST")
 
-    nova_tarefa = {'id': len(tarefas) + 1, 'descricao': descricao}
-    # Cria um dicionário representando a nova tarefa.
-    # O id será o tamanho atual da lista + 1.
+    with request.urlopen(http_request, timeout=10) as response:
+        body = response.read().decode("utf-8", errors="replace")
+        return response.status, body
 
-    tarefas.append(nova_tarefa)
-    # Adiciona a nova tarefa dentro da lista tarefas.
 
-    return jsonify(nova_tarefa), 201
-    # Retorna a tarefa criada em JSON.
-    # O código HTTP 201 significa "Created", ou seja, criado com sucesso.
+def main() -> int:
+    if len(sys.argv) < 2:
+        print(
+            "Uso: python3 script-api.py <arquivo.txt> [url_api]",
+            file=sys.stderr,
+        )
+        return 1
 
-# Implemente as rotas para atualizar e excluir tarefas aqui
-# Comentário indicando que ainda faltam rotas como:
-# PUT/PATCH para atualizar uma tarefa
-# DELETE para excluir uma tarefa
+    file_path = Path(sys.argv[1]).expanduser()
+    target_url = sys.argv[2] if len(sys.argv) > 2 else DEFAULT_URL
 
-if __name__ == '__main__':
-    # Verifica se este arquivo está sendo executado diretamente.
-    # Se for importado por outro arquivo, o código abaixo não roda.
+    if not file_path.is_file():
+        print(f"Arquivo nao encontrado: {file_path}", file=sys.stderr)
+        return 1
 
-    app.run(debug=True)
-    # Inicia o servidor Flask.
-    # debug=True ativa modo de desenvolvimento, mostrando erros detalhados.
+    try:
+        payload = build_payload(file_path)
+    except OSError as exc:
+        print(f"Falha ao ler arquivo: {exc}", file=sys.stderr)
+        return 1
+
+    print("Resumo do arquivo:")
+    print(json.dumps(payload, indent=2, ensure_ascii=True))
+    print(f"Enviando resultado para: {target_url}")
+
+    try:
+        status_code, response_body = post_payload(target_url, payload)
+    except error.URLError as exc:
+        print(f"Falha ao enviar requisicao: {exc}", file=sys.stderr)
+        return 2
+
+    print(f"Resposta HTTP: {status_code}")
+    print(response_body)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

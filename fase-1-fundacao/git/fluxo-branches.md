@@ -1,59 +1,78 @@
-Exemplo de estrutura real:
-
 # Fluxo de Branches Git
 
 ## Branches principais
 
-- `main`: produção / versão estável
-- `develop`: integração de desenvolvimento
+- `main`: versao estavel
+- `develop`: integracao de desenvolvimento
 - `feature/*`: novas funcionalidades
-- `fix/*`: correções
-- `hotfix/*`: correção urgente em produção
+- `fix/*`: correcoes
+- `hotfix/*`: correcoes urgentes em producao
 
----
+## Fluxo padrao para nova feature
 
-## Fluxo padrão para nova feature
-
-### 1. Atualizar repositório
+### 1. Atualizar a branch base
 
 ```bash
 git checkout develop
 git pull origin develop
+```
 
+### 2. Criar branch de trabalho
 
-2. Criar branch
+```bash
 git checkout -b feature/monitoramento-rede
+```
 
-3. Trabalhar e commitar
-git add .git commit -m "Adiciona script de diagnóstico de rede"
+### 3. Trabalhar e commitar
 
-4. Enviar para remoto
+```bash
+git add .
+git commit -m "feat: adiciona script de diagnostico de rede"
+```
+
+### 4. Enviar para o remoto
+
+```bash
 git push origin feature/monitoramento-rede
+```
 
-5. Abrir Pull Request para develop
+### 5. Abrir Pull Request
 
-Correções rápidas
+Abrir PR de `feature/monitoramento-rede` para `develop`.
+
+## Fluxos de correcao
+
+Correcao rapida:
+
+```bash
 git checkout -b fix/erro-gitignore
+```
 
-Hotfix produção
+Hotfix de producao:
+
+```bash
 git checkout -b hotfix/corrige-ssh
+```
 
-# Boas práticas
+## Boas praticas
 
-Nunca trabalhar direto na main
-Commits pequenos e claros
-Nomear branch por contexto
-Sempre pull antes de começar
-Revisar com git diff
+- nunca trabalhar direto na `main`
+- fazer commits pequenos e claros
+- nomear branch pelo contexto da mudanca
+- sempre sincronizar a branch antes de comecar
+- revisar antes de commitar com `git diff`
 
+## Padrao de nomes
 
+- `feature/nome`
+- `fix/nome`
+- `hotfix/nome`
+- `docs/nome`
 
-# Padrão de nomes
+## Pendencia da fase 1
 
-feature/nome
-fix/nome
-hotfix/nome
-docs/nome
+Para fechar o desafio de Git desta fase ainda falta:
 
-Exemplos
-feature/bash-monitoramentofix/readme-fase1docs/ssh-config
+- atingir pelo menos 5 commits
+- abrir PR de `develop` para `main`
+- fazer o merge da PR

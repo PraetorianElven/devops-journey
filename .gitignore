@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+*.pyo
+
+monitoramento_*.log
+relatorio-rede_*.txt
+recursos/
+
+# Artefatos locais de IA / assistentes
+.codex/
+.aider*
+.claude/
+.cursor/
+.windsurf/
+.continue/
+
+# Prompts, conversas e saidas temporarias geradas localmente
+*.prompt
+*.prompts
+*.chat
+*.conversation
+*.transcript
+*.ai.txt
+*.gen.txt

@@ -1,0 +1,3 @@
+DevOps exige pratica constante.
+Este arquivo existe para validar o desafio 5 da fase 1.
+Automacao e observabilidade caminham juntas.

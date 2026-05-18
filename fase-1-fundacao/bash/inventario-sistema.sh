@@ -9,7 +9,8 @@ coletar_dados() {
 
     # IP da Máquina
     echo "Endereço IP:"
-    hostname -I | awk '{print $1}'
+    IP_ADDRESS="$(hostname -I 2>/dev/null | awk '{print $1}')"
+    echo "${IP_ADDRESS:-indisponivel}"
     echo ""
 
     # CPU

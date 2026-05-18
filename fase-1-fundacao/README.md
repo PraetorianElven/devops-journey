@@ -1,15 +1,59 @@
 # Fase 1 - Fundacao
 
+## Resumo da fase
+
+Esta fase consolidou a base de Linux, Bash, Git, redes e automacao simples em Python.
+
+### O que foi praticado
+
+- Scripts Bash para inventario de sistema e diagnostico de rede
+- Estrutura de branches `main` e `develop`
+- Documentacao de acesso SSH por chave
+- Anotacoes sobre OSI, DNS, `/etc/hosts` e `nip.io`
+- Automacao em Python com leitura de arquivo e envio de POST para API publica
+
+### Dificuldades e como foram resolvidas
+
+- Ferramentas podem variar entre distribuicoes:
+  scripts usam fallback entre `ss` e `netstat`, e entre `dig`, `host` e `nslookup`
+- Ambientes restritos podem bloquear DNS, socket ou descoberta de IP:
+  os scripts registram a falha no relatorio em vez de encerrar silenciosamente
+- O desafio de Python foi ajustado para bater exatamente com o enunciado da fase:
+  leitura de arquivo, contagem de linhas/palavras/caracteres e envio via POST
+
+## Status dos desafios
+
+- `Desafio 1`: implementado em [bash/inventario-sistema.sh](/home/paulo/elven/devops-journey/fase-1-fundacao/bash/inventario-sistema.sh:1)
+- `Desafio 2`: parcialmente atendido; ainda depende de abrir PR `develop -> main`, fazer merge e fechar o minimo de 5 commits
+- `Desafio 3`: implementado em [bash/diagnostico-rede.sh](/home/paulo/elven/devops-journey/fase-1-fundacao/bash/diagnostico-rede.sh:1)
+- `Desafio 4`: documentado em [linux/acesso-ssh.md](/home/paulo/elven/devops-journey/fase-1-fundacao/linux/acesso-ssh.md:1), mas a aplicacao no servidor/VM continua sendo manual
+- `Desafio 5`: implementado em [python/script-api.py](/home/paulo/elven/devops-journey/fase-1-fundacao/python/script-api.py:1)
+
+## Desafio 1 - Inventario do sistema
+
+O script coleta:
+
+- IP da maquina
+- uso de CPU
+- uso de memoria
+- uso de disco
+- usuarios logados
+
+Tambem grava a saida em arquivo de log com data no nome.
+
+### Como executar
+
+```bash
+bash fase-1-fundacao/bash/inventario-sistema.sh
+```
+
 ## Desafio 3 - Diagnostico de rede
 
-O script [bash/diagnostico-rede.sh](/home/paulo/elven/devops-journey/fase-1-fundacao/bash/diagnostico-rede.sh:1) foi criado para coletar informacoes basicas de diagnostico de rede e salvar o resultado em um relatorio `.txt` com timestamp.
+O script gera um relatorio `.txt` com timestamp contendo:
 
-### O que o script faz
-
-- Resolve DNS de 3 dominios: `google.com`, `github.com` e `httpbin.org`
-- Testa conectividade HTTP com `curl`
-- Lista portas abertas na maquina com `ss` ou `netstat`
-- Salva tudo em um arquivo no formato `relatorio-rede_YYYY-MM-DD_HH-MM-SS.txt`
+- resolucao DNS de `google.com`, `github.com` e `httpbin.org`
+- teste HTTP com `curl`
+- lista de portas abertas na maquina
 
 ### Como executar
 
@@ -17,19 +61,11 @@ O script [bash/diagnostico-rede.sh](/home/paulo/elven/devops-journey/fase-1-fund
 bash fase-1-fundacao/bash/diagnostico-rede.sh
 ```
 
-### Saida esperada
-
-Ao executar, o script:
-
-- exibe o resultado no terminal;
-- gera um arquivo `.txt` com data e hora;
-- registra DNS, resposta HTTP e portas abertas.
-
 ## nip.io e /etc/hosts
 
 ### Sobre nip.io
 
-O `nip.io` e um servico DNS wildcard gratuito que mapeia qualquer endereco IP para um nome de host, facilitando desenvolvimento local e testes.
+`nip.io` e um servico DNS wildcard que resolve nomes no formato `<ip>.nip.io` para o proprio IP.
 
 Exemplo:
 
@@ -37,23 +73,9 @@ Exemplo:
 192.168.31.79.nip.io
 ```
 
-Esse nome resolve automaticamente para:
-
-```text
-192.168.31.79
-```
-
-Isso ajuda em labs, Kubernetes, Ingress e testes locais sem precisar comprar dominio nem editar DNS a cada projeto.
-
 ### Sobre /etc/hosts
 
-O `/etc/hosts` e um arquivo local do Linux que associa IPs a nomes manualmente.
-
-Formato:
-
-```text
-IP nome aliases
-```
+`/etc/hosts` permite mapear nomes localmente sem depender de DNS externo.
 
 Exemplo:
 
@@ -61,4 +83,33 @@ Exemplo:
 192.168.31.79 minha-app.local
 ```
 
-Assim, sua maquina resolve `minha-app.local` para `192.168.31.79` sem depender de DNS externo.
+## Desafio 4 - Acesso SSH seguro
+
+Os passos para configurar autenticacao por chave, testar o acesso e desabilitar senha no `sshd_config` estao documentados em [linux/acesso-ssh.md](/home/paulo/elven/devops-journey/fase-1-fundacao/linux/acesso-ssh.md:1).
+
+## Desafio 5 - Automacao com Python
+
+O script:
+
+- le um arquivo texto
+- conta linhas, palavras e caracteres
+- envia o resumo para uma API publica via `POST`
+
+### Como executar
+
+```bash
+python3 fase-1-fundacao/python/script-api.py fase-1-fundacao/python/exemplo.txt
+```
+
+### Exemplo de destino alternativo
+
+```bash
+python3 fase-1-fundacao/python/script-api.py fase-1-fundacao/python/exemplo.txt https://httpbin.org/post
+```
+
+## Pendencias para encerrar a fase 1
+
+- criar pelo menos mais 1 commit organizado para fechar o minimo de 5 commits
+- abrir um Pull Request de `develop` para `main` no GitHub
+- fazer o merge desse Pull Request
+- aplicar o desafio de SSH em uma VM ou servidor real e validar login sem senha

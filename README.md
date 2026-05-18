@@ -114,16 +114,16 @@ devops-journey/
 ---
 ### Desafio Final — Fase 1
 > Complete todos os itens abaixo antes de avançar para a Fase 2.
-- [ ] **Desafio 1 — Script de inventário do sistema**
+- [x] **Desafio 1 — Script de inventário do sistema**
   Escreva um script Bash que colete e exiba: uso de CPU, memória, disco, IP da máquina e usuários logados. Salve a saída em um arquivo de log com timestamp.
-- [ ] **Desafio 2 — Ambiente Git completo**
+- [x] **Desafio 2 — Ambiente Git completo**
   Crie um repositório no GitHub com: branch `main` e `develop`, faça ao menos 5 commits organizados, abra 1 pull request de `develop` → `main` e faça o merge. Use `.gitignore` e `README.md`.
-- [ ] **Desafio 3 — Diagnóstico de rede**
+- [x] **Desafio 3 — Diagnóstico de rede**
   Escreva um script que: resolva o DNS de 3 domínios, teste conectividade HTTP com `curl`, liste portas abertas na máquina e salve tudo em um relatório `.txt`.
   Diga leia sobre `nip.io` e `/etc/hosts`
-- [ ] **Desafio 4 — Acesso SSH seguro**
+- [x] **Desafio 4 — Acesso SSH seguro**
   Configure acesso SSH por chave (sem senha) para um servidor ou VM local. Desative login por senha no `sshd_config`. Documente os passos em um `README.md` no repositório.
-- [ ] **Desafio 5 — Automação com Python**
+- [x] **Desafio 5 — Automação com Python**
   Crie um script Python que leia um arquivo de texto, conte palavras, linhas e caracteres, e envie o resultado para uma API pública (ex: httpbin.org) via POST.
 > **Critério de aprovação:** Todos os scripts funcionando, repositório Git organizado, README documentado.
 ---
