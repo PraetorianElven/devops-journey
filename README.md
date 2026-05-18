@@ -93,23 +93,23 @@ devops-journey/
 > Meta: Ter base sólida em SO, terminal, Git e networking básico.
 ### Sistema Operacional & Terminal
 - [X] Bash — scripts básicos, variáveis, loops, condicionais
-- [ ] Vim / Nano — edição de arquivos no terminal
-- [ ] Process Monitoring — `top`, `htop`, `ps`, `kill`
-- [ ] Performance Monitoring — `df`, `du`, `iostat`, `vmstat`
-- [ ] Text Manipulation — `grep`, `sed`, `awk`, `cut`, `sort`
-- [ ] Networking Tools — `ping`, `curl`, `wget`, `netstat`, `ss`, `nmap`
+- [X] Vim / Nano — edição de arquivos no terminal
+- [X] Process Monitoring — `top`, `htop`, `ps`, `kill`
+- [X] Performance Monitoring — `df`, `du`, `iostat`, `vmstat`
+- [X] Text Manipulation — `grep`, `sed`, `awk`, `cut`, `sort`
+- [X] Networking Tools — `ping`, `curl`, `wget`, `netstat`, `ss`, `nmap`
 ### Controle de Versão
-- [ ] Git — commits, branches, merge, rebase, stash
+- [X] Git — commits, branches, merge, rebase, stash
 - [ ] GitHub — pull requests, issues, actions básico
 ### Redes & Protocolos (Básico)
-- [ ] Modelo OSI — 7 camadas
-- [ ] DNS — como funciona, registros A, CNAME, MX
-- [ ] HTTP / HTTPS — métodos, status codes, headers
-- [ ] SSH — chaves, config, tunneling
-- [ ] NFS - FTP - SFTP
-- [ ] SSL / TLS — certificados, HTTPS, Let's Encrypt, mkcert
+- [X] Modelo OSI — 7 camadas
+- [X] DNS — como funciona, registros A, CNAME, MX
+- [x] HTTP / HTTPS — métodos, status codes, headers
+- [X] SSH — chaves, config, tunneling
+- [X] NFS - FTP - SFTP
+- [X] SSL / TLS — certificados, HTTPS, Let's Encrypt, mkcert
 ### Linguagem de Programação (escolha 1)
-- [ ] Python — scripts, automações, bibliotecas (requests, boto3)
+- [X] Python — scripts, automações, bibliotecas (requests, boto3)
 - [ ] Go — (alternativa para ferramentas DevOps nativas)
 ---
 ### Desafio Final — Fase 1
