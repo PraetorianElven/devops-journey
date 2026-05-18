@@ -88,6 +88,45 @@ O script:
 - conta linhas, palavras e caracteres
 - envia o resumo para uma API publica via `POST`
 
+### Pre-requisitos
+
+- estar na raiz do repositorio `devops-journey`
+- ter `python3` instalado
+- ter acesso a internet para validar o `POST` no `httpbin`
+
+### Passo a passo para executar
+
+1. Entrar na raiz do repositorio:
+
+```bash
+cd /home/paulo/elven/devops-journey
+```
+
+2. Validar se o Python 3 esta disponivel:
+
+```bash
+python3 --version
+```
+
+3. Conferir os arquivos do desafio:
+
+```bash
+ls fase-1-fundacao/python/
+```
+
+4. Executar o script com o arquivo de exemplo:
+
+```bash
+python3 fase-1-fundacao/python/script-api.py fase-1-fundacao/python/exemplo.txt
+```
+
+5. Observar a saida no terminal:
+
+- resumo do arquivo em JSON
+- quantidade de linhas, palavras e caracteres
+- envio para `https://httpbin.org/post`
+- codigo de resposta HTTP
+
 ### Como executar
 
 ```bash
@@ -100,9 +139,37 @@ python3 fase-1-fundacao/python/script-api.py fase-1-fundacao/python/exemplo.txt
 python3 fase-1-fundacao/python/script-api.py fase-1-fundacao/python/exemplo.txt https://httpbin.org/post
 ```
 
-## Pendencias para encerrar a fase 1
+### Resultado esperado com o arquivo de exemplo
 
-- criar pelo menos mais 1 commit organizado para fechar o minimo de 5 commits
-- abrir um Pull Request de `develop` para `main` no GitHub
-- fazer o merge desse Pull Request
-- aplicar o desafio de SSH em uma VM ou servidor real e validar login sem senha
+Para o arquivo [python/exemplo.txt](/home/paulo/elven/devops-journey/fase-1-fundacao/python/exemplo.txt:1), o resumo esperado e:
+
+```json
+{
+  "arquivo": "exemplo.txt",
+  "linhas": 3,
+  "palavras": 20,
+  "caracteres": 133
+}
+```
+
+Se a rede estiver disponivel, a execucao deve exibir tambem:
+
+```text
+Enviando resultado para: https://httpbin.org/post
+Resposta HTTP: 200
+```
+
+### Como apresentar
+
+Voce pode explicar a execucao desta forma:
+
+1. o script le um arquivo texto local
+2. conta linhas, palavras e caracteres
+3. monta um JSON com esse resumo
+4. envia o JSON para uma API publica usando `POST`
+5. imprime a resposta HTTP para comprovar o envio
+
+### Observacao sobre ambiente restrito
+
+Se o ambiente estiver sem internet ou com rede bloqueada, a parte de leitura e contagem ainda funciona normalmente, mas o envio via `POST` pode falhar por falta de conectividade.
+
