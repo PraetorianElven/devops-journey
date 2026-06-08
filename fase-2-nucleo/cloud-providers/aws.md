@@ -4,6 +4,8 @@
 
 Estudar fundamentos de AWS com foco prático em infraestrutura para aplicações.
 
+Para laboratorio local, use o simulador em [../aws-simulator/README.md](/home/paulo/elven/devops-journey/fase-2-nucleo/aws-simulator/README.md:1).
+
 Arquitetura comum:
 
 ```text
@@ -61,6 +63,8 @@ Logs systemd:
 ```bash
 journalctl -u nginx -n 100
 ```
+
+No simulador local, `EC2` e apenas emulada. Isso permite praticar `AWS CLI` e Terraform, mas nao um acesso SSH real.
 
 ## Security Group
 
@@ -144,6 +148,77 @@ Boas práticas:
 - habilitar backup
 - definir janela de manutenção
 - monitorar CPU, memória, conexões e storage
+- aplicar janelas de backup e manutencao com previsibilidade
+
+## Laboratorio local com LocalStack
+
+Se a ideia e praticar sem custo, a fase 2 agora traz um laboratorio local pronto.
+
+Fluxo:
+
+```text
+docker compose
+↓
+LocalStack
+↓
+AWS CLI com endpoint local
+↓
+Terraform
+↓
+S3 + VPC + Security Group + IAM + EC2 simulada
+```
+
+### Passo a passo rapido
+
+1. Subir o simulador:
+
+```bash
+cd /home/paulo/elven/devops-journey/fase-2-nucleo/aws-simulator
+docker compose up -d
+```
+
+2. Validar a API:
+
+```bash
+./bin/awslocal.sh sts get-caller-identity
+```
+
+3. Criar bucket de teste:
+
+```bash
+./scripts/bootstrap.sh
+```
+
+4. Aplicar Terraform:
+
+```bash
+cd terraform
+cp terraform.tfvars.example terraform.tfvars
+terraform init
+terraform plan
+terraform apply -auto-approve
+```
+
+5. Conferir recursos:
+
+```bash
+../bin/awslocal.sh s3 ls
+../bin/awslocal.sh ec2 describe-vpcs
+../bin/awslocal.sh ec2 describe-security-groups
+../bin/awslocal.sh iam list-roles
+```
+
+### O que este laboratorio resolve
+
+- pratica `AWS CLI` sem conta real
+- ajuda a entender `endpoint`, `region`, `credentials` e `state`
+- permite exercitar o desafio 4 da fase 2 com baixo risco
+
+### O que ele nao substitui
+
+- comportamento completo da AWS real
+- validacao de custo, cotas e IAM organizacional
+- acesso SSH verdadeiro a uma EC2 produtiva
 
 ## Arquitetura moderna
 
@@ -166,3 +241,4 @@ RDS + S3 + Redis
 3. Coloque aplicação nas private subnets.
 4. Coloque RDS em private subnets.
 5. Defina security groups para cada camada.
+6. Reproduza uma versao reduzida desse desenho no simulador local.
