@@ -29,4 +29,3 @@ recursos/
 *.tfstate.*
 crash.log
 fase-2-nucleo/aws-simulator/tmp/
-fase-2-nucleo/desafio-3/
