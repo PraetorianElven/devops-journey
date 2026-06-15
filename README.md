@@ -32,26 +32,47 @@ devops-journey/
 │       └── script-api.py            # Desafio 5
 │
 ├── fase-2-nucleo/                   # Dias 31–60
-│   ├── README.md
-│   ├── docker/
-│   │   ├── Dockerfile               # Desafio 1
-│   │   ├── docker-compose.yml       # Desafio 2
-│   │   └── anotacoes.md
-│   ├── nginx/
-│   │   ├── nginx.conf               # Desafio 5
-│   │   └── ssl-setup.md
+│   ├── README.md                    # Resumo da fase, dificuldades e status
+│   ├── webservers/
+│   │   ├── nginx.md
+│   │   ├── apache.md
+│   │   └── caddy.md
+│   ├── containers/
+│   │   ├── docker.md
+│   │   └── docker-compose.md
 │   ├── cicd/
-│   │   ├── .github/
-│   │   │   └── workflows/
-│   │   │       └── pipeline.yml     # Desafio 3
-│   │   └── Argocd/FluxCD
-│   ├── terraform/
-│   │   ├── main.tf                  # Desafio 4
-│   │   ├── variables.tf
-│   │   ├── outputs.tf
-│   │   └── backend.tf
-│   └── cloud/
-│       └── aws-anotacoes.md
+│   │   ├── github-actions.md
+│   │   ├── gitlab-ci.md
+│   │   ├── argocd.md
+│   │   └── fluxcd.md
+│   ├── iac/
+│   │   ├── terraform.md
+│   │   ├── terragrunt.md
+│   │   └── atlantis.md
+│   ├── networking-avancado/
+│   │   ├── proxy-reverso.md
+│   │   ├── load-balancer.md
+│   │   ├── firewall.md
+│   │   ├── redis.md
+│   │   └── varnish.md
+│   ├── cloud-providers/
+│   │   ├── aws.md
+│   │   ├── azure.md
+│   │   └── gcp.md
+│   └── aws-simulator/
+│       ├── README.md                # Desafio 4 com LocalStack
+│       ├── docker-compose.yml
+│       ├── bin/
+│       │   └── awslocal.sh
+│       ├── scripts/
+│       │   ├── bootstrap.sh
+│       │   └── cleanup.sh
+│       └── terraform/
+│           ├── providers.tf
+│           ├── main.tf
+│           ├── variables.tf
+│           ├── outputs.tf
+│           └── terraform.tfvars.example
 │
 ├── fase-3-avancado/                 # Dias 61–90
 │   ├── README.md

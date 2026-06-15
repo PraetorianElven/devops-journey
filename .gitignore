@@ -22,3 +22,10 @@ recursos/
 *.transcript
 *.ai.txt
 *.gen.txt
+
+# Terraform / simuladores locais
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+fase-2-nucleo/aws-simulator/tmp/
