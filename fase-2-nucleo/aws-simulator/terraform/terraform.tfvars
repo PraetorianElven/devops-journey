@@ -1,0 +1,6 @@
+region             = "us-east-1"
+aws_endpoint       = "http://localhost:4566"
+bucket_name        = "devops-journey-artifacts"
+vpc_cidr           = "10.20.0.0/16"
+public_subnet_cidr = "10.20.1.0/24"
+ami_id             = "ami-12345678"
